@@ -1,17 +1,10 @@
 /*
  * This bespoke "hack" code is for the H801 (LIXADA) control module. 
  * The H801 module is based on an ESP8266 and can drive a RGB LED strip of lights. 
- * This code responds to HTTP commands, but it could easily be converted to respond to MQTT etc - up to you
+ * - This code responds to MQTT messages of the form ffffff to topic ESP_RGB_1 
+ * e.g. 00cc00  or ff00cc for RGB control
  * 
  * N.B. You have to solder 6 header pins on the H801 - this is so you can connect a cheap FDTI USB for programming.
- * N.B. You have to store your network SSID and password in the code variables *ssid and *pass (see below in code)
- * 
- * When all is done and the module connected and powered up, you will see a new IP (server) appear in your network. 
- * If you access this new IP (server) with a web browser, you can control the lights as follows :
- * To turn all three RGB outputs ON,              use http://192.168.1.xxx/rgb/ffffff
- * To turn all three RGB outputs OFF,             use http://192.168.1.xxx/rgb/000000 
- * To turn on GREEN a little bit,                 use http://192.168.1.xxx/rgb/003300 
- * To turn on RED and BLUE a bit, with max GREEN, use http://192.168.1.xxx/rgb/33ff33 
  */
 #include <FS.h>                   //this needs to be first, or it all crashes and burns...
 
