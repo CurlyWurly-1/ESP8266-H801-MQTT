@@ -69,13 +69,16 @@ int BLUE_A = 0;
 
 //define your default values here, if there are different values in config.json, they are overwritten.
 //length should be max size + 1 
-char mqtt_server[40] = "192.168.1.5";
-char mqtt_port[6] = "1083";
+char mqtt_server[40] = "10.1.10.22";
+char mqtt_port[6] = "1883";
 //char blynk_token[33] = "YOUR_BLYNK_TOKEN";
 //default custom static IP
-char static_ip[16] = "192.168.1.123";
-char static_gw[16] = "192.168.1.1";
+char device_topic[60] = "ESP_RGB_1";
+char static_ip[16] = "10.1.10.141";
+char static_gw[16] = "10.1.10.1";
 char static_sn[16] = "255.255.255.0";
+char config_file[25] = "/config.json";
+boolean clean_reset = false;  // should be false for production use!
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -169,9 +172,10 @@ void reconnect() {
     if (client.connect("ESP8266Client")) {
       Serial1.println("connected");
       // Once connected, publish an announcement...
-      client.publish("outTopic", "ESP_RGB_1 is now connected!");
+      client.publish("outTopic", device_topic);
       // ... and resubscribe
-      client.subscribe("ESP_RGB_1");
+      Serial1.printf("Subscribing to %s\n", device_topic);
+      client.subscribe(device_topic);
       LEDoff;
       LED2on;
     } else {
@@ -202,17 +206,20 @@ void setup() {
   LED2off;
 
   //clean FS, for testing
-//  SPIFFS.format();                                                   // Comment this out after testing!
-
+  if (clean_reset) {
+    Serial1.println("clean_reset is true, formatting file system...");
+    SPIFFS.format();
+  }
+  
   //read configuration from FS json
   Serial1.println("mounting FS...");
 
   if (SPIFFS.begin()) {
     Serial1.println("mounted file system");
-    if (SPIFFS.exists("/config.json")) {
+    if (SPIFFS.exists(config_file)) {
       //file exists, reading and loading
       Serial1.println("reading config file");
-      File configFile = SPIFFS.open("/config.json", "r");
+      File configFile = SPIFFS.open(config_file, "r");
       if (configFile) {
         Serial1.println("opened config file");
         size_t size = configFile.size();
@@ -228,6 +235,7 @@ void setup() {
 
           strcpy(mqtt_server, json["mqtt_server"]);
           strcpy(mqtt_port, json["mqtt_port"]);
+          strcpy(device_topic, json["device_topic"]);
 //          strcpy(blynk_token, json["blynk_token"]);
 
           if(json["ip"]) {
@@ -265,6 +273,7 @@ void setup() {
   // id/name placeholder/prompt default length
   WiFiManagerParameter custom_mqtt_server("server", "mqtt server", mqtt_server, 40);
   WiFiManagerParameter custom_mqtt_port("port", "mqtt port", mqtt_port, 5);
+  WiFiManagerParameter custom_device_topic("topic", "device topic", device_topic, 60);
 //  WiFiManagerParameter custom_blynk_token("blynk", "blynk token", blynk_token, 34);
 
   //WiFiManager
@@ -285,12 +294,16 @@ void setup() {
   //add all your parameters here
   wifiManager.addParameter(&custom_mqtt_server);
   wifiManager.addParameter(&custom_mqtt_port);
+  wifiManager.addParameter(&custom_device_topic);
 //  wifiManager.addParameter(&custom_blynk_token);
 
   //reset settings - for testing
-//  wifiManager.resetSettings();                                                      // Comment this out after testing!
-
-  //set minimu quality of signal so it ignores AP's under that quality
+  if (clean_reset) {
+    Serial1.println("clean_reset is true, resetting WifiManager...");
+    wifiManager.resetSettings();
+  }
+  
+  //set minimum quality of signal so it ignores AP's under that quality
   //defaults to 8%
   wifiManager.setMinimumSignalQuality();
   
@@ -321,6 +334,7 @@ void setup() {
   //read updated parameters
   strcpy(mqtt_server, custom_mqtt_server.getValue());
   strcpy(mqtt_port, custom_mqtt_port.getValue());
+  strcpy(device_topic, custom_device_topic.getValue());
 //  strcpy(blynk_token, custom_blynk_token.getValue());
 
   //save the custom parameters to FS
@@ -330,13 +344,14 @@ void setup() {
     JsonObject& json = jsonBuffer.createObject();
     json["mqtt_server"] = mqtt_server;
     json["mqtt_port"] = mqtt_port;
+    json["device_topic"] = device_topic;
 //    json["blynk_token"] = blynk_token;
 
     json["ip"] = WiFi.localIP().toString();
     json["gateway"] = WiFi.gatewayIP().toString();
     json["subnet"] = WiFi.subnetMask().toString();
 
-    File configFile = SPIFFS.open("/config.json", "w");
+    File configFile = SPIFFS.open(config_file, "w");
     if (!configFile) {
       Serial1.println("failed to open config file for writing");
     }
@@ -351,10 +366,10 @@ void setup() {
   Serial1.println(WiFi.localIP());
   Serial1.println(WiFi.gatewayIP());
   Serial1.println(WiFi.subnetMask());
+  Serial1.println(device_topic);
 
   client.setServer(mqtt_server, 1883);
   client.setCallback(callback);
-
 }
 
 
