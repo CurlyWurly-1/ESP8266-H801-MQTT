@@ -31,6 +31,9 @@ mqtt_topic    = 'ESP_RGB_1'
 # Generate a Client ID with the publish prefix.
 client_id = f'publish-{random.randint(0, 1000)}'
 
+###########################################################
+# connect_mqtt()
+###########################################################
 def connect_mqtt():
     def on_connect(client, userdata, flags, rc):
         if rc == 0:
@@ -45,39 +48,54 @@ def connect_mqtt():
     client.connect(mqtt_broker, mqtt_port)
     return client
 
-
+###########################################################
+# publish()
+###########################################################
 def publish(client):
     msg_count = 1
     while True:
-        time.sleep(0.5)
-#        msg = f"messages: {msg_count}"
-# Red
-#        msg = 'ff0000'
-# Green
-#        msg = '00ff00'
-# Blue
-#        msg = '0000ff'
-# All lights off
-        msg = '000000'
+        time.sleep(1)
+        msg = f"messages: {msg_count}"
 
-        result = client.publish(mqtt_, msg)
+        if msg_count   == 1:
+            msg = 'ff0000';     # Red
+        elif msg_count == 2:
+            msg = '00ff00';     # Green
+        elif msg_count == 3:
+            msg = '0000ff';     # Blue
+        elif msg_count == 4:
+            msg = '00ffff';     # mix 1
+        elif msg_count == 5:
+            msg = 'ffff00';     # mix 2
+        elif msg_count == 6:
+            msg = 'ff00ff';     # mix 3
+        elif msg_count == 7:
+            msg = 'ffffff';     # White
+        elif msg_count == 8:
+            msg = '000000'     # All lights off
+
+        result = client.publish(mqtt_topic, msg)
         # result: [0, 1]
         status = result[0]
         if status == 0:
-            print(f"Send `{msg}` to  `{mqtt_}`")
+            print(f"Send `{msg}` to topic `{mqtt_topic}`")
         else:
-            print(f"Failed to send message to  {mqtt_}")
+            print(f"Failed to send message to topic {mqtt_topic}")
         msg_count += 1
-        if msg_count > 5:
-            break
+        if msg_count > 8:
+            msg_count = 1
 
-
-def run():
+###########################################################
+# main()
+###########################################################
+def main():
     client = connect_mqtt()
     client.loop_start()
     publish(client)
     client.loop_stop()
 
-
+###########################################################
+# P R O G R A M   S T A R T S   H E R E publish()
+###########################################################
 if __name__ == '__main__':
-    run()
+    main()
