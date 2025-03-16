@@ -13,9 +13,9 @@
 #   - Remove all cables and power from H801
 #   - Open up H801 case to access H801 PCB 
 #   - Solder 6 header pins into H801 PCB
-#   - Attach 3 female to female dupont cables to connect the H801 PCB to the TTL serial FTDI adaptor (as per advice from above links)
-#   - Attach a single female to female dupont cable to short the 2 pins on the H801 PCB (that set the H801 PCB into programming mode on its power up)
-#   - Attach a USB cable between your computer to the TTL serial FTDI adaptor
+#   - Attach 3 dupont female to female cables to connect from the H801 PCB to the TTL serial FTDI adaptor (as per advice from above links)
+#   - Attach a single dupont female to female cable to short the 2 pins on the H801 PCB (that set the H801 PCB into programming mode on its power up)
+#   - Attach a USB cable from your computer to the TTL serial FTDI adaptor
 #   - Attach a female barrel power connector socket to the H801 PCB by hooking up the +ve and -ve power leads accordingly. You can then power the H801 using a standard 5V-2V brick power supply and it makes it easier to remove and attach power whenever you need to 
 #   
 # Software actions
@@ -30,20 +30,20 @@
 #   - Initiate Programming into the H801 by following the sequence below
 #          - Remove FDTI adapter USB cable from Computer
 #          - Remove power plug from female barrel socket
-#          - Short the programming pins with a single dupont female to female cable          
+#          - Short the programming pins with a dupont female to female cable          
 #          - Insert power plug into female barrel socket (to power the H801 PCB) 
 #          - Insert FDTI adapter USB cable into Computer
 #          - Press the "Upload" button in your Arduino IDE
 #          - N.B. It may be that you see dots and dashes and after a while the upload crashes. This part of the process is signifying that the arduino IDE is trying to connect to the H801 and it times out before success. 
-#                 If this is happening to you, just try the upload again - But when you see the dots and dashes, unplug and replug the barrel power plug.
+#                 If this is happening to you, just try the followin trick. Try the upload again, but when you see the dots and dashes, unplug and replug the barrel power plug.
 #                 This unplug and replug power action will kick the H801 to accept a connection for programming, and the process should then continue to completion. 
-#                 If this still doesn't work, check you really did short the programming pins together for the H801 to accept reprogramming
-#          - Check that uploading has finished OK
+#                 If this still doesn't work, check you really did short the programming pins together with a dupont female to female cable (for the H801 to accept reprogramming on powerup)
+#          - Check that uploading has finished OK - you should see a success message in the Arduino IDE
 #          - Remove the single dupont female to female cable, its the one that shorts the programming pins together 
-#          - unplug power from female barrel socket
-#          - unplug DTI adapter USB cable from Computer
+#          - Unplug power plug from female barrel socket
+#          - Unplug FDTI adapter USB cable from Computer
 #          - Wait 2 seconds 
-#          - Plug DTI adapter USB cable into Computer
+#          - Plug FDTI adapter USB cable into Computer
 #          - Plug power plug into female barrel socket
 #          - View messages in the Arduinio IDE serial monitor (on your desktop)
 #          - If all is OK, the red and green LEDS will both be lit, and the device will be ready to accept RGB MQTT messages 
