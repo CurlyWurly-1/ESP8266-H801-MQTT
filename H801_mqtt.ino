@@ -56,7 +56,8 @@
 #######################################
 # Python program actions
 #######################################
-# This is a separate partner program called "mqtt_H801_send_in_network.py". Please go to this program for actions
+# This is a separate partner program called "mqtt_H801_send_in_network.py". 
+# Please go to the program comments in that program - To see the other actions that you need to progress
 
 
 ############################################################################
