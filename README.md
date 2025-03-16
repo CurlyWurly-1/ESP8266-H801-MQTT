@@ -18,6 +18,7 @@ Just in case it does get fixed, I have the left the original sketch in (called "
    - _This is the Arduino code that you need to flash into the H801_
    - _Please see the program comments on how to use_
    - _Reference info can be found here_
+     - https://github.com/knolleary/pubsubclient
      - https://www.inspectmygadgets.com/flashing-the-h801-led-controller-with-tasmota-firmware/
      - https://tasmota.github.io/docs/devices/H801/#hardware
        
@@ -27,9 +28,5 @@ Just in case it does get fixed, I have the left the original sketch in (called "
 
 # Old References (for the old "wifi manager" version - not needed now)
 This is based on the following sources
-
-https://eryk.io/2015/10/esp8266-based-wifi-rgb-controller-h801/
-
-https://github.com/tzapu/WiFiManager
-
-https://github.com/knolleary/pubsubclient
+- https://eryk.io/2015/10/esp8266-based-wifi-rgb-controller-h801/
+- https://github.com/tzapu/WiFiManager
