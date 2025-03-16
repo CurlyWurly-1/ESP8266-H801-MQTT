@@ -28,5 +28,5 @@ Just in case it does get fixed, I have the left the original sketch in (called "
 
 # Old References (for the old "wifi manager" version - not needed now)
 This is based on the following sources
-- https://eryk.io/2015/10/esp8266-based-wifi-rgb-controller-h801/
+- https://eryk.io/2015/10/esp8266-based-wifi-rgb-controller-h801/](https://web.archive.org/web/20171221004955/https://eryk.io/2015/10/esp8266-based-wifi-rgb-controller-h801/
 - https://github.com/tzapu/WiFiManager
