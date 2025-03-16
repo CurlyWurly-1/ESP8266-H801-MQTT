@@ -1,29 +1,17 @@
 ## https://www.emqx.com/en/blog/how-to-use-mqtt-in-python#full-python-mqtt-code-example
 
-#######################################
-# H801 actions 
-#######################################
-#  Follow instructions in the Arduino "partner" program called "H801.ino" 
-#   - Remove all cables and power from H801
-#   - Open up case 
-#   - Solder header pins
-#   - Attach 3 Male to male dupont cables from H801 to TTL serial FTDI adaptor
-#   - Attach a single male to male dupont cable across the 2 pins that set the H801 in programming mode
-#   - Insert USB cable from your computer to TTL serial FTDI adaptor
-#   - Execute Arduino IDE and following uistructinos   
-#  Setup the H801 
-#   - To log into your broadband network
-#   - To log into your MQTT broker
-#   - To subscribe to topic 'ESP_RGB_1' 
-#  Put power into H801
 
 #######################################
 # What to do with this program
 #######################################
-#  Amend this python program
-#   - Enter details to log into your MQTT broker  
-#  Execute this python code 
-#   - Make sure you execute this program in a computer that is signed into your broadband network 
+#  - Alter three parameters to suit - mqtt_broker, mqtt_username and mqtt_password  
+#  - Execute this program in a computer that is signed into your broadband network 
+
+#######################################
+# H801 actions 
+#######################################
+#  Follow instructions in the Arduino "partner" program called "H801_mqtt.ino" 
+
 
 
 import random
@@ -31,11 +19,11 @@ import time
 
 from paho.mqtt import client as mqtt_client
 
-
-mqtt_broker   = '192.168.1.170'
+mqtt_broker   = 'PUT YOUR MQTT IP ADDRESS HERE e.g. 192.168.1.123'
 mqtt_port     = 1883
-mqtt_username = 'mqtt_user'
-mqtt_password = 'D1strict!1'
+mqtt_username = 'PUT YOUR MQTT USER ID HERE'
+mqtt_password = 'PUT YOUR MQTT PASSWORD HERE'
+
 
 # N.B. This needs to be the same value that is also programmed in your H801
 mqtt_topic    = 'ESP_RGB_1'
