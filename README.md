@@ -1,4 +1,7 @@
 # ESP8266-H801-MQTT
+
+<img src="h801.jpg" alt="H801 Controller"/>
+
 ESP8266 / H801 RGB controller using MQTT and WiFi - With programming via the Arduino IDE 
 
 I have had to re-visit this repository because the wifi manager library seems to have connection problems with the ESP8166EX chip
@@ -17,6 +20,7 @@ Just in case it does get fixed, I have the left the original sketch in (called "
    - _Reference info can be found here_
      - https://www.inspectmygadgets.com/flashing-the-h801-led-controller-with-tasmota-firmware/
      - https://tasmota.github.io/docs/devices/H801/#hardware  
+
 
 # Old References (for the old "wifi manager" version - not needed now)
 This is based on the following sources
