@@ -13,9 +13,11 @@
 #   - Remove all cables and power from H801
 #   - Open up H801 case to access H801 PCB 
 #   - Solder 6 header pins into H801 PCB
-#   - Attach 3 Male to male dupont cables to connect from H801 PCB to TTL serial FTDI adaptor (as per advice from above links)
-#   - Attach a single male to male dupont cable to short the 2 pins on the H801 PCB (that set the H801 PCB into programming mode on its power up)
+#   - Attach 3 female to female dupont cables to connect from H801 PCB to TTL serial FTDI adaptor (as per advice from above links)
+#   - Attach a single female to female dupont cable to short the 2 pins on the H801 PCB (that set the H801 PCB into programming mode on its power up)
 #   - Attach a USB cable between your computer to the TTL serial FTDI adaptor
+#   - Attach the 2 power leads between a female barrel power connector and the H801 PCB (It makes it easier to remove and attach power whenyou need to )
+#   
 # Software actions
 #   - Execute Arduino IDE in your desktop
 #   - add "https://arduino.esp8266.com/stable/package_esp8266com_index.json" to "File->Preferences->field "Additinnal Board Manager URLs"
@@ -28,23 +30,24 @@
 #   - Initiate Programming into the H801 by following the sequence below
 #          - Remove FDTI adapter USB cable from Computer
 #          - Remove power plug from barrel socket
-#          - Short the programming pins with a single dupont male to male cable          
+#          - Short the programming pins with a single dupont female to female cable          
 #          - Insert power plug into barrel socket (to power the H801 PCB) 
 #          - Insert FDTI adapter USB cable into Computer
-#          - Press "Upload" i your Arduino IDE
+#          - Press the "Upload" button in your Arduino IDE
 #          - N.B. It may be that you see dots and dashes which signify that the arduino IDE is trying to connect and after a while, the upload crashes 
-#                 If this is the case, just temporarily unplug and plug in the barrel power plug - This will definately kick the H801 to accept programming
-#          - When programming has finished, remove the Shorting single dupont male to male cable which shorts the programming pins together 
+#                 If this is the case, just try again and when you see the dots and dashes, temporarily unplug and plug in the barrel power plug - This will definately kick the H801 to accept a connection for programming
+#          - When programming has finished, remove the Shorting single dupont female to female cable which shorts the programming pins together 
 #          - unplug power from barrel socket
 #          - unplug DTI adapter USB cable from Computer
 #          - Wait 2 seconds 
 #          - Plug DTI adapter USB cable from Computer
-#          - Plug in power from barrel socket and view message in the serial monitor in Arduino IDE
-#          - If all is OK, the red and green LEDS will both be lit, and the device is ready top accept RGB MQTT messages 
+#          - Plug in power into barrel socket
+#          - View messages in the Arduinio IDE serial monitor
+#          - If all is OK, the red and green LEDS will both be lit, and the device will be ready to accept RGB MQTT messages 
 
- N.B. You have to solder 6 header pins on the H801 - this is so you can connect a cheap FDTI USB adapter to enable programming.
-       Only 5 are needed though as follows
-       - 2 pins are for putting the H801 into programming mode (You connect them together with a female dupont cable)
+ N.B. Remember you have to solder 6 header pins on the H801 PCB - this is so you can connect a cheap FDTI USB adapter to enable programming.
+       Only 5 pins are actually used though 
+       - 2 pins are for putting the H801 into programming mode (You connect them together with a female to female dupont cable)
        - 3 pins are for the Ground/TX/RX to a TTL/USB convertor 
 
 #######################################
