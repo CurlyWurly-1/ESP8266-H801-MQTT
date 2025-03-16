@@ -16,7 +16,7 @@
 #   - Attach 3 female to female dupont cables to connect from H801 PCB to TTL serial FTDI adaptor (as per advice from above links)
 #   - Attach a single female to female dupont cable to short the 2 pins on the H801 PCB (that set the H801 PCB into programming mode on its power up)
 #   - Attach a USB cable between your computer to the TTL serial FTDI adaptor
-#   - Attach the 2 power leads between a female barrel power connector and the H801 PCB (It makes it easier to remove and attach power whenyou need to )
+#   - Attach a female barrel power connector to the H801 PCB by hooking up the +ve and -ve power leads accordingly. You can then power the H801 using a standard 5V-2V brick power supply and it makes it easier to remove and attach power whenever you need to 
 #   
 # Software actions
 #   - Execute Arduino IDE in your desktop
@@ -34,8 +34,10 @@
 #          - Insert power plug into barrel socket (to power the H801 PCB) 
 #          - Insert FDTI adapter USB cable into Computer
 #          - Press the "Upload" button in your Arduino IDE
-#          - N.B. It may be that you see dots and dashes which signify that the arduino IDE is trying to connect and after a while, the upload crashes 
-#                 If this is the case, just try again and when you see the dots and dashes, temporarily unplug and plug in the barrel power plug - This will definately kick the H801 to accept a connection for programming
+#          - N.B. It may be that you see dots and dashes and after a while the upload crashes. This part of the process is signifying that the arduino IDE is trying to connect to the H801 and it times out before success. 
+#                 If this is happening to you, just try the upload again - But when you see the dots and dashes, unplug and replug the barrel power plug.
+#                 This unplug and replug power action will kick the H801 to accept a connection for programming, and the process should then continue to completion. 
+#                 If this still doesn't work, check you really did short the programming pins together for the H801 to accept reprogramming
 #          - When programming has finished, remove the Shorting single dupont female to female cable which shorts the programming pins together 
 #          - unplug power from barrel socket
 #          - unplug DTI adapter USB cable from Computer
