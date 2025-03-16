@@ -2,7 +2,7 @@
 
 <img src="h801.jpg" alt="H801 Controller"/>
 
-ESP8266 / H801 RGB controller using MQTT and WiFi - With programming via the Arduino IDE 
+ESP8266 / H801 RGB controller using MQTT and WiFi (with soft fade)  
 
 I have had to re-visit this repository because the wifi manager library seems to have connection problems with the ESP8166EX chip
 
