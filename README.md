@@ -19,7 +19,10 @@ Just in case it does get fixed, I have the left the original sketch in (called "
    - _Please see the program comments on how to use_
    - _Reference info can be found here_
      - https://www.inspectmygadgets.com/flashing-the-h801-led-controller-with-tasmota-firmware/
-     - https://tasmota.github.io/docs/devices/H801/#hardware  
+     - https://tasmota.github.io/docs/devices/H801/#hardware
+       
+
+<img src="h801-with-program-header.jpg" alt="H801 PCB"/>
 
 
 # Old References (for the old "wifi manager" version - not needed now)
