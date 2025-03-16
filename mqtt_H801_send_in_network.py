@@ -60,13 +60,13 @@ def publish(client):
 # All lights off
         msg = '000000'
 
-        result = client.publish(topic, msg)
+        result = client.publish(mqtt_, msg)
         # result: [0, 1]
         status = result[0]
         if status == 0:
-            print(f"Send `{msg}` to topic `{topic}`")
+            print(f"Send `{msg}` to  `{mqtt_}`")
         else:
-            print(f"Failed to send message to topic {topic}")
+            print(f"Failed to send message to  {mqtt_}")
         msg_count += 1
         if msg_count > 5:
             break
